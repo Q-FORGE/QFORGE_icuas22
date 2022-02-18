@@ -1,6 +1,24 @@
 
 # Change Log
 
+## [1.0.3] - 15-02-2022
+
+### Changed
+- Updated ```startup/challenge/session.yml``` to start the Ardupilot firmware with disabled GPS sensor
+- Updated ```startup/challenge/session.yml``` to initialize offboard control with ```/red/odometry``` Gazebo feedback
+
+### Added
+- ```arducopter_nogps``` - Ardupilot parameters with disabled GPS sensor
+
+## [1.0.2] - 09-02-2022
+
+### Changed
+- Updated ```startup/challenge/session.yml``` to launch world with improved lighting
+
+### Added
+- ```well_lit.world``` - world with improved lighting
+- ```well_lit_world.launch``` - launch file for world with improved lighting
+
 ## [1.0.1] - 03-02-2022
 
 ### Changed
