@@ -5,10 +5,14 @@ The main repository for the ICUAS 2022 UAV competition.
 | ICUAS 2022 Competition build status | [![Melodic](https://github.com/larics/icuas22_competition/actions/workflows/melodic.yaml/badge.svg)](https://github.com/larics/icuas22_competition/actions/workflows/melodic.yaml)  | [![Noetic](https://github.com/larics/icuas22_competition/actions/workflows/noetic.yaml/badge.svg)](https://github.com/larics/icuas22_competition/actions/workflows/noetic.yaml) |
 |-----------------------|---------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
 
+## Tips and tricks
+- disable safe-boot 
+- if you're getting issues with nvidia-docker, check to see if your nvidia driver is running with 'nvidia-smi'
+
 ## Install
 
 You can either manually install the UAV software stack by following 
-[uav_ros_simulation](https://github.com/larics/uav_ros_simulation) instruction or simply 
+[uav_ros_simulation](https://github.com/larics/uav_ros_simulation) instruction or simply  
 use Docker insted.
 
 To install Docker on your system execute the following command:
