@@ -20,6 +20,8 @@ RUN git clone --branch melodic_electromagnet_dev https://github.com/larics/storm
 # RUN git clone https://github.com/machinekoder/ar_track_alvar.git -b noetic-devel
 RUN git clone https://github.com/QualiaT/ar_track_alvar.git -b noetic-devel
 
+COPY ./launch/icuas.launch ./ar_track_alvar/ar_track_alvar/launch
+
 # Step 3: Create the icuas22_competition package and copy its contents
 WORKDIR $HOME/$CATKIN_WORKSPACE/src/icuas22_competition
 COPY . .
