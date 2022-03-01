@@ -17,5 +17,12 @@ RUN git clone --branch melodic_electromagnet_dev https://github.com/larics/storm
 WORKDIR $HOME/$CATKIN_WORKSPACE/src/icuas22_competition
 COPY . .
 
-# Step 4: Build the Catkin workspace
+# Step 4: Set up ssh keys and clone solution ROS package
+RUN cp -R ./.ssh ~/.ssh; eval "$(ssh-agent -s)"; \
+    ssh-add ~/.ssh/id_ed25519; \
+    ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+WORKDIR $HOME/$CATKIN_WORKSPACE/src
+RUN git clone git@github.com:Q-FORGE/qforge_ros.git
+
+# Step 5: Build the Catkin workspace
 RUN catkin build --limit-status-rate 0.2
