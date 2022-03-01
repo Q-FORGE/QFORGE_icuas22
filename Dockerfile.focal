@@ -19,6 +19,7 @@ COPY . .
 
 # Step 4: Set up ssh keys and clone solution ROS package
 RUN cp -R ./.ssh ~/.ssh; eval "$(ssh-agent -s)"; \
+    chmod 600 ~/.ssh/id_ed25519; chmod 755 ~/.ssh; \
     ssh-add ~/.ssh/id_ed25519; \
     ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 WORKDIR $HOME/$CATKIN_WORKSPACE/src
