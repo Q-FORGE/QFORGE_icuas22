@@ -20,7 +20,7 @@ windows:
         - waitForRos; roslaunch ardupilot_gazebo kopterworx.launch 
           use_sim_time:=true
           enable_magnet:=true
-          x:=-10
+          x:=8 y:=-3
           world:=$(rospack find icuas22_competition)/worlds/well_lit.world
         - waitForRos; waitForSimulation; roslaunch larics_gazebo_worlds spawn_arena_v1.launch
         - waitForRos; waitForSimulation; roslaunch larics_gazebo_worlds spawn_alvar_tile.launch 
@@ -49,4 +49,5 @@ windows:
   - solution:
       layout: tiled
       panes:
-        - # Launch your Challenge solution here
+        - waitForRos; roslaunch ar_track_alvar icuas.launch &
+        - waitForRos; rostopic echo /ar_pose_marker
