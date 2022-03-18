@@ -36,6 +36,12 @@ origin	git@github.com:Q-FORGE/QFORGE_icuas22.git (push)
 upstream	git@github.com:larics/icuas22_competition.git (fetch)
 upstream	git@github.com:larics/icuas22_competition.git (push)
 ```
+
+Fetch upstream commits
+```bash
+git fetch upstream
+```
+
 Rebase all of our changes on top of the new ICUAS repository.
 ```bash
 git rebase upstream/main origin/main
