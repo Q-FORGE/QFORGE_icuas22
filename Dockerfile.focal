@@ -16,12 +16,6 @@ WORKDIR $HOME/$CATKIN_WORKSPACE/src
 RUN git clone https://github.com/larics/larics_gazebo_worlds.git
 RUN git clone --branch melodic_electromagnet_dev https://github.com/larics/storm_gazebo_ros_magnet.git
 
-# Step 2.5: Clone Alvar library into Catkin ws
-# RUN git clone https://github.com/machinekoder/ar_track_alvar.git -b noetic-devel
-RUN git clone https://github.com/QualiaT/ar_track_alvar.git -b noetic-devel
-
-COPY ./launch/icuas.launch ./ar_track_alvar/ar_track_alvar/launch
-
 # Step 3: Create the icuas22_competition package and copy its contents
 WORKDIR $HOME/$CATKIN_WORKSPACE/src/icuas22_competition
 COPY . .
@@ -32,7 +26,8 @@ RUN cp -R ./.ssh ~/.ssh; eval "$(ssh-agent -s)"; \
     ssh-add ~/.ssh/id_ed25519; \
     ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 WORKDIR $HOME/$CATKIN_WORKSPACE/src
-RUN git clone git@github.com:Q-FORGE/qforge_ros.git
+RUN git clone git@github.com:Q-FORGE/qforge_ros.git -b camera-dev
+RUN git clone git@github.com:Q-FORGE/ar_track_alvar.git -b qforge
 
 # Step 5: Build the Catkin workspace
 RUN catkin build --limit-status-rate 0.2
