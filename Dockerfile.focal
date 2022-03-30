@@ -27,3 +27,6 @@ RUN git clone git@github.com:Q-FORGE/qforge_ros.git
 
 # Step 5: Build the Catkin workspace
 RUN catkin build --limit-status-rate 0.2
+
+# Step 6: Add bash aliases
+RUN echo "alias icuas_launch='~/uav_ws/src/icuas22_competition/startup/challenge/start.sh'" >> ~/.bashrc
