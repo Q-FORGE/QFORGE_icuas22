@@ -49,5 +49,5 @@ windows:
   - solution:
       layout: tiled
       panes:
-        - waitForRos; roslaunch ar_track_alvar icuas.launch &
-        - waitForRos; rostopic echo /ar_pose_marker
+        - waitForRos; roslaunch qforge_ros ar_tag.launch &
+        - waitForRos; rostopic echo /ar_tag_est
