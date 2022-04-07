@@ -8,6 +8,10 @@ ARG USER=root
 RUN apt-get update && apt-get install -q -y \
     vim
 
+# Step 1.1 Get some packages for Alvar
+RUN apt-get install ros-noetic-pcl-conversions -qq -y >/dev/null
+RUN apt-get install ros-noetic-pcl-ros -qq -y >/dev/null
+
 # Step 2: Go to the Catkin workspace and clone all needed ROS packages
 WORKDIR $HOME/$CATKIN_WORKSPACE/src
 RUN git clone https://github.com/larics/larics_gazebo_worlds.git
@@ -24,6 +28,7 @@ RUN cp -R ./.ssh ~/.ssh; eval "$(ssh-agent -s)"; \
     ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 WORKDIR $HOME/$CATKIN_WORKSPACE/src
 RUN git clone git@github.com:Q-FORGE/qforge_ros.git
+RUN git clone git@github.com:Q-FORGE/ar_track_alvar.git -b qforge
 
 # Step 5: Build the Catkin workspace
 RUN catkin build --limit-status-rate 0.2
