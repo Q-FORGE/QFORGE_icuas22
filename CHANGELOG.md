@@ -1,6 +1,22 @@
 
 # Change Log
 
+## [1.0.5] - 25-02-2022
+
+### Added
+- ```startup/challenge/custom_config/position_control_thrust.yaml``` - Position parameters used for thrust control
+
+### Changed
+- ```startup/challenge/session.yml``` - Use the new position control parameter set where thrust is regarded as thrust, and not climb rate.
+
+## [1.0.4] - 19-02-2022
+
+### Added
+- ```Dockerfile.focal-nogpu``` - A Dockerfile for hardware without a dedicated graphics card.
+
+### Changed
+- ```run_docker.sh``` - Disable ```--gpus all``` flag if running an image that does not use a dedicated GPU.
+
 ## [1.0.3] - 15-02-2022
 
 ### Changed

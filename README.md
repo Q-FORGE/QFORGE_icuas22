@@ -20,6 +20,45 @@ To install Docker on your system execute the following command:
 curl https://raw.githubusercontent.com/larics/uav_ros_simulation/main/installation/dependencies/docker.sh | bash
 ```
 
+## Update Q-FORGE Repository 
+To update our Q-FORGE repository with the latest ICUAS repository, first add ICUAS repository as a new remote repository.
+```bash
+git remote add upstream git@github.com:larics/icuas22_competition.git
+```
+Check the remote repository list with:
+```bash
+git remote -v
+```
+It should show two remote repositories as:
+```bash
+origin	git@github.com:Q-FORGE/QFORGE_icuas22.git (fetch)
+origin	git@github.com:Q-FORGE/QFORGE_icuas22.git (push)
+upstream	git@github.com:larics/icuas22_competition.git (fetch)
+upstream	git@github.com:larics/icuas22_competition.git (push)
+```
+
+Once both remotes are present, make sure git has the latest information on both remotes.
+```bash
+git fetch upstream
+git fetch origin
+```
+
+Switch to a temporary branch for update 
+```bash
+git checkout -b update_MMDD origin/main
+```
+
+When attached at the temporary branch, rebase all of our changes on top of the new ICUAS repository.
+```bash
+git rebase upstream/main
+```
+
+Check the commits list and make sure all of our commits are above all of their commits. A forced push is required as some of our commits are older than their new commits and the "must fast-forward" rule is no longer followed.
+```bash
+git push --force origin main
+```
+**Do not use VSCode's Push&Pull button**
+
 ## Troubleshooting
 
 Checkout ```CHANGELOG.md``` for any new changes added to this project.
@@ -80,6 +119,7 @@ Alternatively, to build the ICUAS2022 Competition solution image please execute 
 
 Additional arguments:
 * ```--focal``` - Build Docker image for Focal distro
+* ```--focal-nogpu``` - Build Docker image for Focal distro (no dedicated graphics card)
 * ```--bionic``` - Build Docker image for Bionic distra (default)
 * ```--build-args``` - Append additional Docker build arguments, e.g. --no-cache
 
@@ -90,6 +130,12 @@ To automatically start and setup the challenge navigate to ```startup/challenge`
 ./start.sh
 ```
 This should automatically setup and start the challenge, as well as run your code.
+
+There are three worlds available for the challenge. If you want to start the challenge with different world you can run:
+```
+./start.sh N
+```
+where N can be 1, 2 or 3 depending on the world you want to load.
 
 * Commands that run your challenge solution (rosrun, roslaunch etc.) should be placed in the ```session.yml``` file.
 * Software configuration specific to the challenge should be placed in the ```custom_config``` folder.
@@ -103,6 +149,7 @@ This should automatically setup and start the challenge, as well as run your cod
 
 Additional arguments:
 * ```--focal``` - Run Focal distro container
+* ```--focal-nogpu``` - Run Focal distro container (no dedicated graphics card)
 * ```--bionic``` - Run Bionic distro container
 * ```--run-args``` - Append additional Docker run arguments, e.g. --rm
 
