@@ -9,8 +9,8 @@ RUN apt-get update && apt-get install -q -y \
     vim
 
 # Step 2 Get some packages for Alvar
-RUN apt install ros-melodic-pcl-conversions -qq -y
-RUN apt install ros-melodic-pcl-ros -qq -y
+RUN apt-get install ros-melodic-pcl-conversions -qq -y
+RUN apt-get install ros-melodic-pcl-ros -qq -y
 
 # Step 3: Go to the Catkin workspace and clone all needed ROS packages
 WORKDIR $HOME/$CATKIN_WORKSPACE/src
