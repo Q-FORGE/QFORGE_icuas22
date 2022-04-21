@@ -5,7 +5,7 @@ pre_window: |
   export UAV_NAMESPACE=red;
   export ARENA_TYPE=<%= @settings["arena"]%>;
   if [[ -z "${ARENA_TYPE}" ]]
-  then 
+  then
     export ARENA_TYPE=1
   fi;
   if [ $ARENA_TYPE -ge 6] || [ $ARENA_TYPE -le 0 ]
@@ -37,8 +37,8 @@ windows:
       layout:
       panes:
         - roscore
-        - export SITL_RITW_TERMINAL="tmux new-window -d -n:ardupilot1"; waitForRos; 
-          roslaunch ardupilot_gazebo sim_vehicle.launch 
+        - export SITL_RITW_TERMINAL="tmux new-window -d -n:ardupilot1"; waitForRos;
+          roslaunch ardupilot_gazebo sim_vehicle.launch
           enable_console:=false
           additional_arguments:="--no-rebuild"
           parm_file:=$(rospack find icuas22_competition)/parameters/arducopter_nogps.params
@@ -47,18 +47,18 @@ windows:
   - gazebo:
       layout: tiled
       panes:
-        - waitForRos; roslaunch ardupilot_gazebo kopterworx.launch 
+        - waitForRos; roslaunch ardupilot_gazebo kopterworx.launch
           use_sim_time:=true
           enable_magnet:=true
           x:=-10
           world:=$(rospack find icuas22_competition)/worlds/well_lit.world
         - waitForRos; waitForSimulation; roslaunch larics_gazebo_worlds spawn_arena_v$ARENA_TYPE.launch
-        - waitForRos; waitForSimulation; sleep 2; roslaunch larics_gazebo_worlds spawn_alvar_tile.launch 
+        - waitForRos; waitForSimulation; sleep 2; roslaunch larics_gazebo_worlds spawn_alvar_tile.launch
           x:=$TILE_X yaw:=$TILE_YAW z:=$TILE_Z y:=$TILE_Y
   - arm&takeof:
       layout: tiled
       panes:
-        - waitForRos; roslaunch uav_ros_control pid_carrot.launch 
+        - waitForRos; roslaunch uav_ros_control pid_carrot.launch
           manual_takeoff:=false
           msf_callback_enable:=true
           odometry:=odometry
@@ -74,9 +74,10 @@ windows:
   - trajectory:
       layout: tiled
       panes:
-        - waitForRos; roslaunch uav_ros_tracker topp_tracker.launch 
+        - waitForRos; roslaunch uav_ros_tracker topp_tracker.launch
           tracker_config:=custom_config/topp_config_custom.yaml
   - solution:
       layout: tiled
       panes:
-        - # Launch your Challenge solution here
+        - waitForRos; waitForSimulation; roslaunch qforge_ros solution.launch
+        - # Extra window
