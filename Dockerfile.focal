@@ -29,6 +29,8 @@ RUN cp -R ./.ssh ~/.ssh; eval "$(ssh-agent -s)"; \
 WORKDIR $HOME/$CATKIN_WORKSPACE/src
 RUN git clone git@github.com:Q-FORGE/qforge_ros.git
 RUN git clone git@github.com:Q-FORGE/ar_track_alvar.git -b qforge
+RUN git clone git@github.com:Q-FORGE/avoidance.git
+RUN git clone git@github.com:Q-FORGE/local_planner.git
 
 # Step 6 install opencv only one version of python in container so no need to specify
 RUN pip install opencv-python --no-input
