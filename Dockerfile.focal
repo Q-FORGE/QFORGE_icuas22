@@ -21,16 +21,12 @@ RUN git clone --branch melodic_electromagnet_dev https://github.com/larics/storm
 WORKDIR $HOME/$CATKIN_WORKSPACE/src/icuas22_competition
 COPY . .
 
-# Step 5: Set up ssh keys and clone solution ROS package
-RUN cp -R ./.ssh ~/.ssh; eval "$(ssh-agent -s)"; \
-    chmod 600 ~/.ssh/id_ed25519; chmod 755 ~/.ssh; \
-    ssh-add ~/.ssh/id_ed25519; \
-    ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+# Step 5: Clone solution ROS package
 WORKDIR $HOME/$CATKIN_WORKSPACE/src
-RUN git clone git@github.com:Q-FORGE/qforge_ros.git
-RUN git clone git@github.com:Q-FORGE/ar_track_alvar.git -b qforge
-RUN git clone git@github.com:Q-FORGE/avoidance.git -b master
-RUN git clone git@github.com:Q-FORGE/local_planner.git -b integration
+RUN git clone https://github.com/Q-FORGE/qforge_ros.git
+RUN git clone https://github.com/Q-FORGE/ar_track_alvar.git -b qforge
+RUN git clone https://github.com/Q-FORGE/avoidance.git -b master
+RUN git clone https://github.com/Q-FORGE/local_planner.git -b integration
 
 # Step 6 install opencv only one version of python in container so no need to specify
 RUN pip install opencv-python --no-input
